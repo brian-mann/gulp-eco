@@ -22,7 +22,7 @@ module.exports = function (opt) {
     output = eco.compile(str);
     output = 'this.JST["' + JSTpath + '"] = ' + output + '\n';
     output = "this.JST || (this.JST = {});\n" + output;
-    output = "(function() {\n\t" + output + "}).call(this);\n";
+    output = "(function() {\n" + output + "}).call(this);\n";
 
     try {
       file.contents = new Buffer(output);

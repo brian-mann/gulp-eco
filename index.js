@@ -20,8 +20,9 @@ module.exports = function (opt) {
 
     var str = file.contents.toString();
     output = eco.compile(str);
-    output = 'window.JST["' + JSTpath + '"] = ' + output + '\n';
-    output = "if (!window.JST) {\n  window.JST = {};\n}\n" + output;
+    output = 'this.JST["' + JSTpath + '"] = ' + output + '\n';
+    output = "this.JST || (this.JST = {});\n" + output;
+    output = "(function() { \n" + output + "}).call(this); \n";
 
     try {
       file.contents = new Buffer(output);
